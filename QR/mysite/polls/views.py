@@ -1,5 +1,5 @@
 # from wagtail.images.models import Image as WagtailImage
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Question
 from .forms import *
@@ -11,6 +11,7 @@ from django.conf.urls.static import static
 import base64
 from io import StringIO, BytesIO
 from PIL import Image
+from django.core.exceptions import ObjectDoesNotExist
 
 # from django.urls import reverse
 
@@ -56,13 +57,34 @@ def index(request):
     print("storage" + img_dst)
     img.save(img_dst)
  
+    # try to fetch data from DB
+    try:
+        cQrCodesExisting = cQrCode.objects.get(uniqueId=int(latest_question_list))
+        #no exception means object preesent and can be filtered against auth to redirect to Welcome Page
+        if cQrCodesExisting.isAuthenticated == True : 
+            print ("auth Done")
+            return redirect('success/')
+    except ObjectDoesNotExist:
+        print("do nothing for now")
+            
 
     cQrCodesObj = cQrCode()
-    cQrCodesObj.uniqueId = str(latest_question_list)
+    cQrCodesObj.uniqueId = int(latest_question_list)
     cQrCodesObj.QrCodeImg_name = name
+    cQrCodesObj.isAuthenticated = False
+    try:
+        cQrCodesObj.save()
+    except:
+        print("Do nothing")
+        
+    print("saving object to DB")
     print(cQrCodesObj.uniqueId)
     print(cQrCodesObj.QrCodeImg_name)
     return render(request, 'polls/index.html',  {'cQrCodes_image' : cQrCodesObj} )
 
-
+def update(request):
+    print("refresh on same page is generated")
+    return render(request, 'polls/index.html',  {'cQrCodes_image' : cQrCodesObj} )
  
+def success(request):
+    return render(request, 'polls/welcome.html'  )

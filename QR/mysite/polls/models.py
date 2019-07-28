@@ -22,5 +22,8 @@ class Choice(models.Model):
 # Create your models here.
 
 class cQrCode(models.Model): 
-    uniqueId = models.CharField(max_length=50) 
-    QrCodeImg_name = models.ImageField(upload_to='images/') 
+    
+    uniqueId = models.IntegerField(primary_key=True) 
+    QrCodeImg_name = models.ImageField(upload_to='images/')
+    isAuthenticated = models.BooleanField(default = False )
+    

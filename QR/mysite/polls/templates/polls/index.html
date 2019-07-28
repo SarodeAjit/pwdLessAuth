@@ -10,15 +10,45 @@
       </script> 
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> 
       </script> 
+
+
+
+
 </head> 
 <body> 
-  
+{% if cQrCodes_image.isAuthenticated == False %}<p> </p>
 
             <div class="col-md-4"> 
                     {{ cQrCodes_image.uniqueId }} 
                      <img src="{{ cQrCodes_image.QrCodeImg_name.url }}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" /> 
             </div> 
-
+            
+            
+{% endif %}
   
 </body> 
+ <script type="text/javascript">
+
+
+    $( document ).ready(function() {
+       setInterval(function(){
+           $.ajax({
+               url:'' ,
+               type: "get",
+               cache: true,
+               timeout: 1000,
+               dataType: 'html',
+               success: function(data) {
+                   console.log("success");
+                   $('#MyTable').html(data);
+               },
+               error: function(data) {
+               console.log("fail");
+                   <!-- alert("Got an error dude "+data); -->
+               }
+           });
+       },3000);
+    });
+
+ </script>
 </html> 
