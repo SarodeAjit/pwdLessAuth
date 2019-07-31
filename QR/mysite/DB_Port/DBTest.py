@@ -13,7 +13,7 @@ print("Opened database successfully")
 #    print("do nothing for now")
 
 
-uniqueId = 832589
+uniqueId = 124247
 
 
 Query = "UPDATE polls_cqrcode set isAuthenticated = 0 where uniqueId = " + str(uniqueId)

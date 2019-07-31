@@ -3,7 +3,7 @@
 <head> 
     <meta charset="UTF-8"> 
     <title>QrCode</title> 
-  
+	  <meta http-equiv="refresh" content="2"/>
       <meta name="viewport" content="width=device-width, initial-scale=1"> 
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> 
@@ -27,28 +27,28 @@
 {% endif %}
   
 </body> 
- <script type="text/javascript">
+ <!-- <script type="text/javascript"> -->
 
 
-    $( document ).ready(function() {
-       setInterval(function(){
-           $.ajax({
-               url:'' ,
-               type: "get",
-               cache: true,
-               timeout: 1000,
-               dataType: 'html',
-               success: function(data) {
-                   console.log("success");
-                   $('#MyTable').html(data);
-               },
-               error: function(data) {
-               console.log("fail");
+    <!-- $( document ).ready(function() { -->
+       <!-- setInterval(function(){ -->
+           <!-- $.ajax({ -->
+               <!-- url:'' , -->
+               <!-- type: "get", -->
+               <!-- cache: true, -->
+               <!-- timeout: 1000, -->
+               <!-- dataType: 'html', -->
+               <!-- success: function(data) { -->
+                   <!-- console.log("success"); -->
+                   <!-- $('#MyTable').html(data); -->
+               <!-- }, -->
+               <!-- error: function(data) { -->
+               <!-- console.log("fail"); -->
                    <!-- alert("Got an error dude "+data); -->
-               }
-           });
-       },3000);
-    });
+               <!-- } -->
+           <!-- }); -->
+       <!-- },3000); -->
+    <!-- }); -->
 
  </script>
 </html> 

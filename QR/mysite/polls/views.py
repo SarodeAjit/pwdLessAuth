@@ -1,5 +1,5 @@
 # from wagtail.images.models import Image as WagtailImage
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse
 from .models import Question
 from .forms import *
@@ -39,7 +39,7 @@ def index(request):
     )
 
     # The data that you want to store
-    data = "192.168.0.111/" + str(latest_question_list)
+    data = "192.168.0.111:8999/" + str(latest_question_list)
 
     # Add data
     qr.add_data(data)
@@ -63,7 +63,8 @@ def index(request):
         #no exception means object preesent and can be filtered against auth to redirect to Welcome Page
         if cQrCodesExisting.isAuthenticated == True : 
             print ("auth Done")
-            return redirect('success/')
+            # return redirect('success/')
+            return render_to_response( 'polls/welcome.html'  )
     except ObjectDoesNotExist:
         print("do nothing for now")
             
